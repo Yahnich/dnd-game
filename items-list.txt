@@ -6,7 +6,8 @@ Head Cage: Charms an enemy, fights for you until it dies; gets full health.
 Magic Match: Explosion in small radius, burns all enemies in larger radius
 Quicksilver Quiver: Large fire rate up for short time
 Gorgon's Eye: Petrifies enemies after 2 seconds, petrifies for 2 seconds
-
+Bird in a Cage: Area of Effect Sleep
+Leprechaun's Pot: One-Time Use; If used in boss room gives money + item, if used outside gives only gold and less
 
 
 -- Passive --
@@ -16,3 +17,14 @@ Gargouille's Tongue - Stone-Coated Projectiles, Damage Up, Speed Down (Sulfur?)
 Unicornshoe - Luck multiplier
 Horseshoe - Luck up
 Explosive Enchantment - Projectiles explode into mini-projectiles upon impact
+Fairy Dust - All Stats Up
+Lance of Longinus - Throwable spear, returns to owner; deals contact damage
+Ent Seed - Damage Up Hp Up
+Weed - HP UP, Damage Up, Fire Rate Down
+Mermaid Tail - Water Creep, Dex Up
+A Kitten(?) - Starts small, if kept for 3 floors becomes a Chimera; every floor a body part is added (Lv1 -> Kitten? (does nothing), Lv2 -> Kitten? Goat (charges enemy sometimes), Lv3 -> Baby Chimera (poisons enemies) Lv4 -> Chimera (contact damage) )
+Red Scale - Strength Up
+Purple Scale - Constitution Up
+Green Scale - Dexterity Up
+Blue Scale - Intelligence Up
+Fairy Wings - Flight + Speed Up; Cursed
