@@ -1,0 +1,18 @@
+Items:
+
+-- Active --
+
+Head Cage: Charms an enemy, fights for you until it dies; gets full health.
+Magic Match: Explosion in small radius, burns all enemies in larger radius
+Quicksilver Quiver: Large fire rate up for short time
+Gorgon's Eye: Petrifies enemies after 2 seconds, petrifies for 2 seconds
+
+
+
+-- Passive --
+
+Gargouille's Wing - Flight + Speed Down
+Gargouille's Tongue - Stone-Coated Projectiles, Damage Up, Speed Down (Sulfur?)
+Unicornshoe - Luck multiplier
+Horseshoe - Luck up
+Explosive Enchantment - Projectiles explode into mini-projectiles upon impact

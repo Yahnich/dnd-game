@@ -1,0 +1,25 @@
+WIZARD
+Projectile: Fire Ball
+Active Item: Magic Match
+
+
+
+ARCHER
+Projectile: Arrow
+Active Item: Quicksilver Quiver
+
+
+
+WARRIOR
+Projectile: /
+Melee High Damage Sword
+
+
+
+GORGON
+Projectile: Triple Snake (Poison Tears)
+Active Item: Gorgon's Eye
+
+
+JESTER 
+RANDOM EVERYTHING
