@@ -1,0 +1,15 @@
+STATS:
+
+Strength: Damage
+Constitution: HP
+Dexterity: Fire Rate
+Intelligence: Active Item Cooldown Reduction
+Luck: Luck
+
+
+
+Lawful Good -> Chaotic Evil Alignment als vervanging voor engel/duivel deals
+
+9 verschillende altaren met elke hun eigen requirements; maar alle goede goden hebben dezelfde pool etc
+
+Soort CUltist/donkere magier die beloningen

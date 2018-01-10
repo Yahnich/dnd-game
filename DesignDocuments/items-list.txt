@@ -14,7 +14,7 @@ Leprechaun's Pot: One-Time Use; If used in boss room gives money + item, if used
 
 Gargouille's Wing - Flight + Speed Down
 Gargouille's Tongue - Stone-Coated Projectiles, Damage Up, Speed Down (Sulfur?)
-Unicornshoe - Luck multiplier
+Unicornshoe - Luck multiplier (mss all stats of dergelijke voor verwijdering van deals)
 Horseshoe - Luck up
 Explosive Enchantment - Projectiles explode into mini-projectiles upon impact
 Fairy Dust - All Stats Up
@@ -27,4 +27,4 @@ Red Scale - Strength Up
 Purple Scale - Constitution Up
 Green Scale - Dexterity Up
 Blue Scale - Intelligence Up
-Fairy Wings - Flight + Speed Up; Cursed
+Fairy Wings - Flight + Speed Up; Less Good/Neutral Chance (Evil Up)

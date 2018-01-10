@@ -1,7 +1,0 @@
-STATS:
-
-Strength: Damage
-Constitution: HP
-Dexterity: Fire Rate
-Intelligence: Active Item Cooldown Reduction
-Luck: Luck

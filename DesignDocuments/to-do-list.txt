@@ -1,0 +1,25 @@
+TODO
+
+Player:
+
+Implement HP
+
+- Implement attributes
+Strength - Damage
+Constitution - HP
+Dexterity - Fire Rate
+Intelligence - Active Item Cooldown Reduction
+Luck - Luck
+
+Hitbox Detection
+Collision Detection
+
+Projectiles:
+
+Deal Damage
+
+Hitbox Detection
+Collision Detection
+
+Range (Shot Height / Tear Gravity)
+Shot Speed
