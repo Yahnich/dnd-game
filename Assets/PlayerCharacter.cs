@@ -1,15 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCharacter : MonoBehaviour {
-
-    public float maxSpeed;
     public GameObject bulletPrefab;
+    public Text hpText;
+
+    private const float MOVE_SPEED = 5f;
+    private const float SHOT_SPEED = 7.5f;
+
+    private float baseDamage = 3.5f;
+    private float baseHeight = 25f;
+    private float baseShotSpeed = 1f;
+    private float baseFallSpeed = 0.3f;
+    private float moveSpeed = 1.0f;
+    private int fireDelay = 10;
+    private int maxHealth = 5;
+    private int currHealth;
 
     private Rigidbody2D _RB2D;
-    private Animator _A;
-    private int _fireDelay = 30;
+    private Animator _AI;
 
     private bool facingRight = true;
 
@@ -17,26 +28,25 @@ public class PlayerCharacter : MonoBehaviour {
 	// Use this for initialization
 	private void Start () {
         _RB2D = GetComponent<Rigidbody2D>();
-	}
+        currHealth = maxHealth;
+    }
 	
 	// Update is called once per fixed dt
 	private void FixedUpdate () {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
+        float fireX = Input.GetAxis("FireHorizontal");
+        float fireY = Input.GetAxis("FireVertical");
 
-        _RB2D.velocity = new Vector2(moveX * maxSpeed, moveY * maxSpeed);
+        hpText.text = this.currHealth + "/" + this.maxHealth;
+
+        _RB2D.velocity = new Vector2(moveX * moveSpeed * MOVE_SPEED, moveY * moveSpeed * MOVE_SPEED);
 
         if ((!facingRight && moveX > 0) || (facingRight && moveX < 0)) {
             FlipSprite();
         }
-	}
 
-    private void Update()
-    {
-        float fireX = Input.GetAxis("FireHorizontal");
-        float fireY = Input.GetAxis("FireVertical");
-
-        if (_fireDelay <= 0)
+        if (fireDelay <= 0)
         {
             if (fireX != 0)
             {
@@ -49,10 +59,10 @@ public class PlayerCharacter : MonoBehaviour {
                 FireBullet(fireDirection);
             }
         }
-        else {
-            --_fireDelay;
+        else
+        {
+            --fireDelay;
         }
-        
     }
 
     private void FlipSprite()
@@ -64,17 +74,21 @@ public class PlayerCharacter : MonoBehaviour {
     }
 
     private void FireBullet(Vector2 fireDirection) {
-        _fireDelay = 30;
+        fireDelay = 30;
         // Create the Bullet from the Bullet Prefab
         var bullet = (GameObject)Instantiate(
             bulletPrefab,
             transform.position,
             transform.rotation);
 
-        // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody2D>().velocity = fireDirection * 5;
+        // Get true bullet object
+        var bulletInstance = bullet.GetComponent<Bullet>();
+        bulletInstance.SetDamage(this.baseDamage);
+        bulletInstance.SetHeight(this.baseHeight);
+        bulletInstance.SetShotSpeed(this.baseShotSpeed);
+        bulletInstance.SetFallSpeed(this.baseFallSpeed);
 
-        // Destroy the bullet after 2 seconds
-        Destroy(bullet, 2.0f);
+        // Add velocity to the bullet
+        bullet.GetComponent<Rigidbody2D>().velocity = fireDirection * bulletInstance.GetShotSpeed() * SHOT_SPEED + this._RB2D.velocity / 3;
     }
 }
