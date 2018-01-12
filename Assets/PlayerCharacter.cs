@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCharacter : MonoBehaviour {
+public class PlayerCharacter : BaseEntity
+{
     public GameObject bulletPrefab;
     public Text hpText;
 
@@ -16,52 +17,88 @@ public class PlayerCharacter : MonoBehaviour {
     private float baseFallSpeed = 0.3f;
     private float moveSpeed = 1.0f;
     private int fireDelay = 10;
-    private int maxHealth = 5;
-    private int currHealth;
 
     private Rigidbody2D _RB2D;
-    private Animator _AI;
+    private SpriteRenderer _SR;
 
     private bool facingRight = true;
+    private bool dead = false;
+
+    public static PlayerCharacter reference;
+    void Awake()
+    {
+        reference = this;
+    }
+     
 
 
-	// Use this for initialization
-	private void Start () {
+    // Use this for initialization
+    private void Start () {
         _RB2D = GetComponent<Rigidbody2D>();
+        _SR = GetComponent<SpriteRenderer>();
+        maxHealth = 3;
         currHealth = maxHealth;
     }
 	
 	// Update is called once per fixed dt
 	private void FixedUpdate () {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
-        float fireX = Input.GetAxis("FireHorizontal");
-        float fireY = Input.GetAxis("FireVertical");
-
         hpText.text = this.currHealth + "/" + this.maxHealth;
-
-        _RB2D.velocity = new Vector2(moveX * moveSpeed * MOVE_SPEED, moveY * moveSpeed * MOVE_SPEED);
-
-        if ((!facingRight && moveX > 0) || (facingRight && moveX < 0)) {
-            FlipSprite();
-        }
-
-        if (fireDelay <= 0)
+        if (!this.IsDead())
         {
-            if (fireX != 0)
+            float moveX = Input.GetAxis("Horizontal");
+            float moveY = Input.GetAxis("Vertical");
+            float fireX = Input.GetAxis("FireHorizontal");
+            float fireY = Input.GetAxis("FireVertical");
+            _RB2D.velocity = new Vector2(moveX * moveSpeed * MOVE_SPEED, moveY * moveSpeed * MOVE_SPEED);
+
+            if ((!facingRight && moveX > 0) || (facingRight && moveX < 0))
             {
-                Vector2 fireDirection = new Vector2(fireX, 0);
-                FireBullet(fireDirection);
+                FlipSprite();
             }
-            else if (fireY != 0)
+
+            if (fireDelay <= 0)
             {
-                Vector2 fireDirection = new Vector2(0, fireY);
-                FireBullet(fireDirection);
+                if (fireX != 0)
+                {
+                    Vector2 fireDirection = new Vector2(fireX, 0);
+                    FireBullet(fireDirection);
+                }
+                else if (fireY != 0)
+                {
+                    Vector2 fireDirection = new Vector2(0, fireY);
+                    FireBullet(fireDirection);
+                }
             }
-        }
-        else
-        {
-            --fireDelay;
+            else
+            {
+                --fireDelay;
+            }
+            if (this.IsInvulnerable())
+            {
+                this.invulFrames--;
+                if (this.invulFrames % 5 == 0)
+                {
+                    if (_SR.color.a == 0)
+                    {
+                        Color tmp = _SR.color;
+                        tmp.a = 255f;
+                        _SR.color = tmp;
+                    }
+                    else
+                    {
+                        Color tmp = _SR.color;
+                        tmp.a = 0f;
+                        _SR.color = tmp;
+                    }
+                }
+                if (this.invulFrames == 0)
+                {
+                    Color tmp = _SR.color;
+                    tmp.a = 255f;
+                    _SR.color = tmp;
+                    this.SetInvulnerable(false);
+                }
+            }
         }
     }
 
@@ -90,5 +127,23 @@ public class PlayerCharacter : MonoBehaviour {
 
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody2D>().velocity = fireDirection * bulletInstance.GetShotSpeed() * SHOT_SPEED + this._RB2D.velocity / 3;
+    }
+
+    protected override void OnTakeDamage()
+    {
+        if (currHealth <= 0)
+        {
+            this.Kill();
+        }
+        else {
+            this.SetInvulnerable(60);
+        }
+        
+
+    }
+
+    public override void Kill() {
+        this.dead = true;
+        Destroy(_RB2D);
     }
 }

@@ -12,17 +12,28 @@ public class Bullet : MonoBehaviour {
     {
         this.height -= this.fSpeed;
         if (this.height <= 0) {
-            Destroy(gameObject);
+            DestroyBulletEvent();
         }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        print(coll.gameObject.tag);
-        if (coll.gameObject.tag.Equals("Enemy") == true)
+        GameObject target = coll.gameObject;
+        if (target.tag.Equals("Enemy") == true)
         {
-            Destroy(coll.gameObject);
+            DestroyBulletEvent();
+            BaseEntity entity = target.GetComponent<BaseEntity>();
+            if (entity != null)
+            {
+                int damage = (int) this.GetDamage() * 10;
+                entity.TakeDamage( damage );
+            }
         }
+    }
+
+    public void DestroyBulletEvent()
+    {
+        Destroy(gameObject);
     }
 
     public float GetDamage()
